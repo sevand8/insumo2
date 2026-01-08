@@ -1,24 +1,43 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
-
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
+import { Tabs } from "expo-router";
+import { House, Camera, User } from 'lucide-react-native';
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
-  );
+    <Tabs screenOptions={{
+      tabBarActiveTintColor: '#ffd33d',
+      headerStyle: {
+        backgroundColor: '#25292e',
+      },
+      headerShadowVisible: false,
+      headerTintColor: '#fff',
+      tabBarStyle: {
+        backgroundColor: '#25292e',
+      },
+    }}>
+       <Tabs.Screen 
+          name="index" 
+          options={{
+            title:"Home",
+            tabBarIcon: ({color, size}) => (
+              <House color={"white"} />
+            )
+        }}/>
+            <Tabs.Screen 
+          name="camera" 
+          options={{
+            title:"Camera",
+            tabBarIcon: ({color, size}) => (
+              <Camera color={"white"} />
+            )
+        }}/>
+            <Tabs.Screen 
+          name="user" 
+          options={{
+            title:"User",
+            tabBarIcon: ({color, size}) => (
+              <User color={"white"} />
+            )
+        }}/>
+  </Tabs>
+  )
 }
